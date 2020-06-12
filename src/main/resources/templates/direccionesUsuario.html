@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: common-header"/>
+
+<body>
+
+<div class="container-contact100">
+
+    <!-- barra de navegacion-->
+    <div th:replace="plantilla/template :: navbar"/>
+
+    <div class="container">
+
+        <div class="row" style="min-height: 110px;">
+
+        </div>
+
+        <div class="row">
+
+            <!--categorias de productos-->
+            <div class="col-md-3" style="min-height: 800px;margin-top: 115px;">
+
+                <h5 class="mb-2">Categorías</h5>
+                <hr/>
+
+                <ul class="list-group" id="categoria">
+                    <a th:href="@{/miCuenta}" th:classappend="${activeInfo}? 'active'"
+                       class="list-group-item list-group-item-action ">Informacion Personal</a>
+
+                    <a th:href="@{/listaDireccionesUsuario}" class="list-group-item list-group-item-action"
+                       th:classappend="${activeDirecciones}? 'active'">Mis Direcciones</a>
+
+                    <a th:href="@{/listaMetodosPagoUsuario}" class="list-group-item list-group-item-action" th:classappend="${activeMetodosPago}? 'active'">Mis Metodos de pago</a>
+
+
+                </ul>
+
+            </div>
+
+
+            <!--Usuario-->
+            <div class="col-md-9 mt-5" style="min-height: 1000px;">
+                <div class="row">
+                    <span class="contact100-form-title ml-3" style="color: #0d16ac">Direcciones de Usuario</span>
+                </div>
+
+                <hr/>
+
+<!--                th:href="@{/nuevaDireccion}"-->
+                <a th:href="@{/nuevaDireccion}" class="btn btn-primary my-3" role="button">Crear Direccion</a>
+
+                <div th:if="${!listaEmpty}" class="table-responsive ">
+                    <table class="table table-hover table-striped table-bordered table-sm bg-white">
+
+                        <thead>
+                        <tr class="text-center">
+                            <th>Nombre Receptor</th>
+                            <th>Direccion # 1</th>
+                            <th>Direccion # 2</th>
+                            <th>Ciudad</th>
+                            <th>Departamento</th>
+                            <th>Pais</th>
+                            <th>Operacion</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                        <tr data-th-each="direccionUsuario : ${listaDirecciones}" class="text-center">
+
+                            <td style="vertical-align: middle" th:text="${direccionUsuario.nombreReceptor}"></td>
+
+                            <td style="vertical-align: middle" th:text="${direccionUsuario.direccionUno}"></td>
+
+                            <td style="vertical-align: middle" th:text="${direccionUsuario.direccionDos}"></td>
+
+                            <td style="vertical-align: middle" th:text="${direccionUsuario.ciudad}"></td>
+
+                            <td style="vertical-align: middle" th:text="${direccionUsuario.departamento}"></td>
+
+                            <td style="vertical-align: middle" th:text="${direccionUsuario.pais}"></td>
+
+                            <td style="vertical-align: middle">
+                                <!---->
+                                <a th:href="@{/editarDireccion?id=}+${direccionUsuario.id}" class="btn btn-warning btn-sm" role="button">
+                                    Editar
+                                </a>
+
+                                <!--th:href="@{/eliminarDireccion/}+${direccion.id}" -->
+                                <a th:href="@{/eliminarDireccion/}+${direccionUsuario.id}" class="btn btn-danger btn-sm" onclick="return confirm('¿Esta seguro?')" role="button">
+                                    Eliminar
+                                </a>
+                            </td>
+                        </tr>
+
+                        </tbody>
+
+
+                    </table>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+</div>
+<footer th:replace="plantilla/template :: footer"/>
+<div th:replace="plantilla/template :: body-bottom-scripts"/>
+
+
+</body>
+</html>

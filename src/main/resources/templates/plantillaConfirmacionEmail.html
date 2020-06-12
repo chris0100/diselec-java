@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+
+<head>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-grid.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-reboot.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet">
+
+
+</head>
+<body>
+<p>Estimado <span th:text="${usuario.nombre}"></span>,</p>
+<br/>
+<p>Gracias por su compra, a continuacion te enviamos los detalles de la misma.</p>
+<p>Tu numero de orden es: <strong>#<span th:text="${orden.id}"></span></strong>.</p>
+
+<hr>
+
+<table class="table table-sm">
+    <thead class="thead-light">
+
+    <tr class="text-center">
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Precio</th>
+    </tr>
+
+    </thead>
+
+    <tbody>
+
+    <tr data-th-each="cartItem : ${cartItemList}">
+
+        <td class="small text-center" style="vertical-align: middle"
+            th:text="${#strings.toUpperCase(cartItem.producto.nombre)}">
+        </td>
+
+        <td class="small" th:text="${cartItem.producto.descripcion}"></td>
+
+        <td class="small text-center" style="vertical-align: middle"
+            th:text="${cartItem.cantidad}"></td>
+
+        <td class="small text-center" style="vertical-align: middle"
+            th:with="precio=${cartItem.producto.precio}"
+            th:text="'$'+${#numbers.formatDecimal(precio,0,'COMMA',1,'POINT')}">
+        </td>
+
+    </tr>
+
+    </tbody>
+
+</table>
+
+
+<hr>
+
+<h4 class="my-4">
+    <strong style="font-size: large">Valor Total
+        (<span th:text="${#lists.size(cartItemList)}"></span> productos):
+    </strong>
+    <span class="text-danger" style="font-size: large">
+                                            $ <span th:text="${orden.totalOrden}"></span>
+                                        </span>
+</h4>
+
+
+<br/>
+<p>Cualquier inquietud,</p>
+<p>Diseño Electronico</p>
+<p>300 344 3901 - 311 404 5322</p>
+</body>
+</html>

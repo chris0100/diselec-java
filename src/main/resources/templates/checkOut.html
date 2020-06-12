@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: common-header"/>
+
+<body>
+
+<div class="container-contact100">
+
+    <!-- barra de navegacion-->
+    <div th:replace="plantilla/template :: navbar"/>
+
+    <div class="container">
+
+        <div class="row" style="min-height: 110px;">
+
+        </div>
+
+        <form th:action="@{/checkOut}" method="post">
+            <div class="row">
+
+
+                <!--LEFT SIDE-->
+                <div class="col-md-4" style="min-height: 800px;">
+
+                    <h5 class="mb-2 text-dark">Resumen</h5>
+                    <hr/>
+
+                    <div class="card">
+
+                        <div class="card-body">
+
+                            <button class="btn btn-warning btn-block" type="submit">Procesar Compra</button>
+                            <p class="font-italic card-title small">Al procesar la compra, usted acepta los terminos y
+                                condiciones.</p>
+                            <hr>
+
+                            <h2>Resumen de orden</h2>
+
+                            <div class="row mb-2">
+                                <div class="col-sm-7 text-left">
+                                    Total sin impuesto
+                                </div>
+                                <div class="col-sm-5 text-left">
+                                    $ <span th:with="subtotal=${carritoCompras.subTotal}"
+                                            th:text="${#numbers.formatDecimal(subtotal,0,'COMMA',1,'POINT')}"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="row mb-2">
+                                <div class="col-sm-7 text-left">
+                                    Impuesto estimado
+                                </div>
+                                <div class="col-sm-5 text-left">
+                                    $ <span th:with="impuesto=${carritoCompras.subTotal*0.06}"
+                                            th:text="${#numbers.formatDecimal(impuesto,0,'COMMA',1,'POINT')}"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="row mb-2">
+                                <div class="col-sm-7 text-left">
+                                    <span class="text-danger font-weight-bold">Total orden</span>
+                                </div>
+                                <div class="col-sm-5 text-left">
+                                    <span class="text-danger font-weight-bold">$ </span>
+                                    <span class="text-danger font-weight-bold"
+                                          th:with="total=${carritoCompras.subTotal+(carritoCompras.subTotal*0.06)}"
+                                          th:text="${#numbers.formatDecimal(total,0,'COMMA',1,'POINT')}">
+
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer text-center">
+                            <span class="small">Los cargos de envio no han sido aplicados</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!--RIGHT SIDE-->
+                <div class="col-sm-8">
+
+                    <h5 class="mb-2 text-dark">Datos de pago</h5>
+                    <hr/>
+
+                    <div class="accordion" id="accordionExample">
+
+                        <!--TAB 1-->
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h2 class="mb-0">
+                                    <a class="btn btn-link btn-block text-left text-primary" type="button"
+                                       data-toggle="collapse" data-target="#collapseOne"
+                                       aria-expanded="true" aria-controls="collapseOne" style="cursor:pointer;">
+                                        1. Direccion de envio
+                                    </a>
+                                </h2>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show"
+                                 aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+
+                                    <!--MUESTRA LISTA DE DIRECCIONES DE USUARIO-->
+                                    <table class="table">
+                                        <thead class="thead-light">
+
+                                        <tr>
+                                            <th scope="col">Direcciones Disponibles</th>
+                                            <th scope="col">Operacion</th>
+                                        </tr>
+
+                                        </thead>
+
+                                        <tbody>
+
+                                        <tr data-th-each="direccionUsuario :   ${listaDireccionesUsuario}">
+                                            <td th:text="${direccionUsuario.direccionUno}+', '
+                                                +${direccionUsuario.ciudad}+', '+${direccionUsuario.departamento}">
+                                            </td>
+
+                                            <td>
+                                                <a th:href="@{/usarDireccion(id=${direccionUsuario.id})}">Usar esta
+                                                    direccion</a>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+
+                                    </table>
+
+
+                                    <!--MUESTRA CAMPOS PARA COMPLETAR DIRECCIONES DE USUARIO-->
+<!--                                    <input type="hidden" name="id" th:value="${direccionesEnvio.id}">-->
+
+                                    <div class="form-group">
+                                        <span class="label-input100 text-info">Nombre</span>
+                                        <input class="input100" type="text" name="nombreReceptor"
+                                               placeholder="Ingresa el nombre de quien recibe"
+                                               th:value="${direccionesEnvio.nombreReceptor}" required="required">
+                                    </div>
+
+                                    <span class="label-input100 text-info">Direcciones</span>
+                                    <div class="row">
+
+                                        <div class="form-group col-sm-6">
+                                            <input class="input100" type="text" name="direccionUno" required="required"
+                                                   placeholder="Ingresa la direccion #1"
+                                                   th:value="${direccionesEnvio.direccionUno}">
+                                        </div>
+
+
+                                        <div class="form-group col-sm-6">
+                                            <input class="input100" type="text" name="direccionDos"
+                                                   placeholder="Ingresa la direccion #2"
+                                                   th:value="${direccionesEnvio.direccionDos}">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="form-group col-sm-4">
+                                            <span class="label-input100 text-info">Ciudad</span>
+                                            <input class="input100" type="text" name="ciudad"
+                                                   placeholder="Ingresa la ciudad"
+                                                   th:value="${direccionesEnvio.ciudad}" required="required">
+                                        </div>
+
+
+                                        <div class="form-group col-sm-4">
+                                            <span class="label-input100 text-info">Departamento</span>
+                                            <input class="input100" type="text" name="departamento"
+                                                   placeholder="Ingresa el Departamento"
+                                                   th:value="${direccionesEnvio.departamento}" required="required">
+                                        </div>
+
+
+                                        <div class="form-group col-sm-4">
+                                            <span class="label-input100 text-info">Pais</span>
+                                            <input class="input100" type="text" name="pais"
+                                                   placeholder="Ingresa el Pais"
+                                                   th:value="${direccionesEnvio.pais}" required="required">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--TAB 2-->
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h2 class="mb-0">
+                                    <a class="btn btn-link btn-block text-left collapsed text-primary"
+                                       type="button" data-toggle="collapse"
+                                       data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
+                                       style="cursor:pointer;">
+                                        2. Informacion de pago
+                                    </a>
+                                </h2>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                 data-parent="#accordionExample">
+                                <div class="card-body">
+
+
+                                    <!--MUESTRA LISTA DE METODOS DE PAGO DE USUARIO-->
+                                    <table class="table">
+                                        <thead class="thead-light">
+
+                                        <tr>
+                                            <th scope="col">Tarjetas Disponibles</th>
+                                            <th scope="col">Operacion</th>
+                                        </tr>
+
+                                        </thead>
+
+                                        <tbody>
+
+                                        <tr data-th-each="metodosPagoUsuario :   ${listaMetodosPagoUsuario}">
+                                            <td th:text="${metodosPagoUsuario.nombreTitular} + ' - ' +
+                                            ${metodosPagoUsuario.nombreTarjeta}">
+                                            </td>
+
+                                            <td>
+                                                <a th:href="@{/usarTarjeta(id=${metodosPagoUsuario.id})}">Usar esta
+                                                    tarjeta</a>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+
+                                    </table>
+
+
+                                    <img th:src="@{/img/creditcard.png}" class="img-fluid">
+
+                                    <div class="row mt-2">
+                                        <div class="form-group col-sm-6">
+                                            <span class="label-input100">Tipo de tarjeta</span>
+                                            <select th:name="tipo" class="form-control" th:value="${metodoPago.tipo}">
+
+                                                <option value="visa" th:selected="(${metodoPago.tipo}=='visa')">Visa
+                                                </option>
+
+                                                <option value="mastercard"
+                                                        th:selected="(${metodoPago.tipo}=='mastercard')">Mastercard
+                                                </option>
+
+                                                <option value="amex" th:selected="(${metodoPago.tipo}=='amex')">
+                                                    American Express
+                                                </option>
+
+                                                <option value="discover" th:selected="(${metodoPago.tipo}=='discover')">
+                                                    Discover
+                                                </option>
+
+                                            </select>
+                                        </div>
+
+                                        <input type="hidden" name="nombreTarjeta" th:value="${metodoPago.nombreTarjeta}">
+
+
+                                        <div class="form-group col-sm-6">
+                                            <span class="label-input100">Nombre Titular</span>
+                                            <input class="input100" type="text" name="nombreTitular"
+                                                   placeholder="Ingresa el nombre de tu tarjeta"
+                                                   th:value="${metodoPago.nombreTitular}" required="required">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mt-2">
+                                        <div class="form-group col-sm-4">
+                                            <span class="label-input100">Numero Tarjeta</span>
+                                            <input class="input100" type="text" name="numeroTarjeta"
+                                                   placeholder="Ingresa el numero de tu tarjeta"
+                                                   th:value="${metodoPago.numeroTarjeta}" required="required">
+                                        </div>
+
+
+                                        <div class="form-group col-sm-4">
+                                            <span class="label-input100">Fecha de expiracion</span>
+                                            <div class="d-flex d-inline-block">
+                                                <input type="text" th:value="${metodoPago.mesExpiracion}"
+                                                       name="mesExpiracion" placeholder="MM"
+                                                       class="form-control-sm" style="width: 50px !important;">
+                                                /
+                                                <input type="text" th:value="${metodoPago.yearExpiracion}"
+                                                       name="yearExpiracion" placeholder="YYYY"
+                                                       class="form-control-sm" style="width: 50px !important;">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group col-sm-4">
+                                            <span class="label-input100">CVC</span>
+                                            <input class="input100" type="number" name="cvc"
+                                                   placeholder="Ingresa el codigo de seguridad "
+                                                   th:value="${metodoPago.cvc}" required="required">
+                                        </div>
+                                    </div>
+
+
+                                    <hr>
+
+
+                                    <!--Billing Envio-->
+                                    <div class="text-center">
+                                        <span class="small text-uppercase font-italic
+                                        mb-3">Envio de Factura</span>
+                                    </div>
+
+                                    <div class="check-box">
+                                        <label>
+                                            <input type="checkbox" id="igualDireccionEnvio" name="igualDireccionEnvio"
+                                                   value="true">
+                                            Igual que la direccion de envio
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <span class="label-input100 text-info">Nombre</span>
+                                        <input class="input100 BillingEnvio" type="text" name="nombreBilling"
+                                               placeholder="Ingresa el nombre de quien recibe"
+                                               th:value="${billingsEnvio.nombreBilling}" required="required">
+                                    </div>
+
+                                    <span class="label-input100 text-info">Direcciones</span>
+                                    <div class="row">
+
+                                        <div class="form-group col-sm-6">
+                                            <input class="input100 BillingEnvio" type="text" name="direccionUnoBilling"
+                                                   required="required"
+                                                   placeholder="Ingresa la direccion #1"
+                                                   th:value="${billingsEnvio.direccionUnoBilling}">
+                                        </div>
+
+
+                                        <div class="form-group col-sm-6">
+                                            <input class="input100 BillingEnvio" type="text" name="direccionDosBilling"
+                                                   placeholder="Ingresa la direccion #2"
+                                                   th:value="${billingsEnvio.direccionDosBilling}">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="form-group col-sm-4">
+                                            <span class="label-input100 text-info">Ciudad</span>
+                                            <input class="input100 BillingEnvio" type="text" name="ciudadBilling"
+                                                   placeholder="Ingresa la ciudad"
+                                                   th:value="${billingsEnvio.ciudadBilling}" required="required">
+                                        </div>
+
+
+                                        <div class="form-group col-sm-4">
+                                            <span class="label-input100 text-info">Departamento</span>
+                                            <input class="input100 BillingEnvio" type="text" name="departamentoBilling"
+                                                   placeholder="Ingresa el Departamento"
+                                                   th:value="${billingsEnvio.departamentoBilling}" required="required">
+                                        </div>
+
+
+                                        <div class="form-group col-sm-4">
+                                            <span class="label-input100 text-info">Pais</span>
+                                            <input class="input100 BillingEnvio" type="text" name="paisBilling"
+                                                   placeholder="Ingresa el Pais"
+                                                   th:value="${billingsEnvio.paisBilling}" required="required">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--TAB 3-->
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h2 class="mb-0">
+                                    <a class="btn btn-link btn-block text-left collapsed text-primary"
+                                       type="button" data-toggle="collapse"
+                                       data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
+                                       style="cursor: pointer;">
+                                        3. Productos y tipo de envio
+                                    </a>
+                                </h2>
+                            </div>
+                            <div id="collapseThree" class="collapse"
+                                 aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div class="card-body">
+
+                                    <h5>Selecciona el tipo de envio</h5>
+
+                                    <div class="radio mt-3">
+                                        <label>
+                                            <input type="radio" name="tipoEnvio" value="estandar" checked>
+                                            Estandar
+                                        </label>
+                                    </div>
+
+
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="tipoEnvio" value="premium">
+                                            Premium
+                                        </label>
+                                    </div>
+
+
+                                    <hr>
+
+                                    <!--Listado de productos seleccionados-->
+                                    <table class="table table-sm">
+                                        <thead class="thead-light">
+
+                                        <tr class="text-center">
+                                            <th scope="col">Imagen</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Descripcion</th>
+                                            <th scope="col">Cantidad</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Operacion</th>
+                                        </tr>
+
+                                        </thead>
+
+                                        <tbody>
+
+                                        <tr data-th-each="cartItem :   ${cartItemList}">
+                                            <td style="vertical-align: middle">
+                                                <img th:src="@{/img/productos/}+${cartItem.producto.imagen}"
+                                                     class="img-fluid">
+                                            </td>
+
+                                            <td class="small text-center" style="vertical-align: middle"
+                                                th:text="${#strings.toUpperCase(cartItem.producto.nombre)}">
+                                            </td>
+
+                                            <td class="small" th:text="${cartItem.producto.descripcion}"></td>
+
+                                            <td class="small text-center" style="vertical-align: middle"
+                                                th:text="${cartItem.cantidad}"></td>
+
+                                            <td class="small text-center" style="vertical-align: middle"
+                                                th:with="precio=${cartItem.producto.precio}"
+                                                th:text="'$'+${#numbers.formatDecimal(precio,0,'COMMA',1,'POINT')}">
+                                            </td>
+
+                                            <td style="vertical-align: middle" class="small text-center">
+                                                <a th:href="@{/quitarCartItem?id=}+${cartItem.id}" class="btn btn-sm btn-danger">Borrar</a>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+
+                                    </table>
+
+
+                                    <hr>
+
+                                    <h4>
+                                        <strong style="font-size: large">Total Price
+                                            (<span th:text="${#lists.size(cartItemList)}"></span> productos):
+                                        </strong>
+                                        <span class="text-danger" style="font-size: large">
+                                            $<span th:text="${carritoCompras.subTotal}"></span>
+                                        </span>
+                                    </h4>
+
+                                    <button class="btn btn-warning btn-block mt-4" type="submit">Procesar compra</button>
+                                    <p class="font-italic text-muted small">Al procesar la compra, usted acepta los
+                                        terminos y
+                                        condiciones.</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<footer th:replace="plantilla/template :: footer"/>
+<div th:replace="plantilla/template :: body-bottom-scripts"/>
+
+<script>
+    $(document).ready(function () {
+
+        //al dar clic en la casilla que dice que utiliza la misma direccion que la de envio
+        $('#igualDireccionEnvio').on('click', deshabilitaCampos);
+    });
+
+    function deshabilitaCampos() {
+        if ($('#igualDireccionEnvio').is(":checked")) {
+            $('.BillingEnvio').prop("disabled", true);
+            console.log('se desactiva');
+        } else {
+            $('.BillingEnvio').prop("disabled", false);
+            console.log('se activa');
+        }
+    }
+</script>
+
+</body>
+</html>

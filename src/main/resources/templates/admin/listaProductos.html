@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: common-header"/>
+
+<body>
+
+<!-- barra de navegacion-->
+<div th:replace="plantilla/template :: navbar"/>
+
+<section class="">
+    <div class="container">
+
+        <div class="row" style="min-height: 110px;">
+
+        </div>
+
+        <span class="contact100-form-title mt-3">Lista de Productos</span>
+
+
+        <a th:href="@{/nuevoProducto}" class="btn btn-primary my-3" role="button">Crear producto</a>
+
+        <div class="table-responsive ">
+            <table class="table table-hover table-striped table-bordered">
+
+                <thead>
+                <tr class="text-center">
+                    <th>Miniatura</th>
+                    <th>Nombre</th>
+                    <th>Categoria</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Estatus</th>
+                    <th>Operacion</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr data-th-each="producto : ${listaProductos}" class="text-center">
+                    <td><img th:src="@{/img/productos/}+${producto.imagen}" class="img-fluid"
+                             style="width: 70px; height: auto;"></td>
+
+                    <td style="vertical-align: middle"><a th:href="@{/editarProducto?id=}+${producto.id}"><span
+                            th:text="${producto.nombre}"></span></a></td>
+
+                    <td style="vertical-align: middle" th:text="${producto.categoria}"></td>
+
+                    <td style="vertical-align: middle" th:text="${producto.cantidad}"></td>
+
+                    <td style="vertical-align: middle" th:text="${producto.precio}"></td>
+
+                    <td style="vertical-align: middle" th:text="${producto.estatus}"></td>
+
+                    <td style="vertical-align: middle">
+                        <a th:href="@{/editarProducto?id=}+${producto.id}" class="btn btn-warning" role="button">
+                            Editar
+                        </a>
+
+                        <a th:href="@{/eliminarProducto/}+${producto.id}" class="btn btn-danger" onclick="return confirm('¿Esta seguro?')" role="button">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+
+                </tbody>
+
+
+            </table>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<footer th:replace="plantilla/template :: footer"/>
+<div th:replace="plantilla/template :: body-bottom-scripts"/>
+
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: common-header"/>
+
+<body>
+
+<!-- barra de navegacion-->
+<div th:replace="plantilla/template :: navbar"/>
+
+<div class="container">
+
+    <div class="row" style="min-height: 110px;">
+
+    </div>
+
+    <div class="row">
+
+        <!--categorias de productos-->
+        <div class="col-md-3" style="min-height: 800px;margin-top: 115px;">
+
+            <h5 class="mb-2">Categorías</h5>
+            <hr/>
+
+            <ul class="list-group" id="categoria">
+                <a th:href="@{/catalogoProductos}" th:classappend="${activeAll}? 'active'"
+                   class="list-group-item list-group-item-action ">Todos</a>
+
+                <a th:href="@{/buscarCategoria(categoria='Displays')}" class="list-group-item list-group-item-action"
+                   th:classappend="${activeDisplays}? 'active'">Displays</a>
+
+                <a th:href="@{/buscarCategoria(categoria='Conectores')}" class="list-group-item list-group-item-action"
+                   th:classappend="${activeConectores}? 'active'">Conectores</a>
+
+                <a th:href="@{/buscarCategoria(categoria='Instrumentos')}"
+                   class="list-group-item list-group-item-action" th:classappend="${activeInstrumentos}? 'active'">Instrumentos</a>
+
+                <a th:href="@{/buscarCategoria(categoria='Arduino')}" class="list-group-item list-group-item-action"
+                   th:classappend="${activeArduino}? 'active'">Arduino</a>
+
+                <a th:href="@{/buscarCategoria(categoria='Microcontroladores')}"
+                   class="list-group-item list-group-item-action"
+                   th:classappend="${activeMicrocontroladores}? 'active'">Microcontroladores</a>
+
+                <a th:href="@{/buscarCategoria(categoria='Programadores')}"
+                   class="list-group-item list-group-item-action" th:classappend="${activeProgramadores}? 'active'">Programadores</a>
+
+                <a th:href="@{/buscarCategoria(categoria='Motores')}" class="list-group-item list-group-item-action"
+                   th:classappend="${activeMotores}? 'active'">Motores</a>
+
+                <a th:href="@{/buscarCategoria(categoria='Sensores')}" class="list-group-item list-group-item-action"
+                   th:classappend="${activeSensores}? 'active'">Sensores</a>
+
+                <a th:href="@{/buscarCategoria(categoria='Sistemas OIT')}"
+                   class="list-group-item list-group-item-action" th:classappend="${activeSistemasOIT}? 'active'">Sistemas
+                    OIT</a>
+
+                <a th:href="@{/buscarCategoria(categoria='Pololu')}" class="list-group-item list-group-item-action"
+                   th:classappend="${activePololu}? 'active'">Pololu</a>
+
+                <a th:href="@{/buscarCategoria(categoria='Montaje superficial')}"
+                   class="list-group-item list-group-item-action"
+                   th:classappend="${activeMontajesuperficial}? 'active'">Montaje superficial</a>
+
+                <a th:href="@{/buscarCategoria(categoria='Intel')}" class="list-group-item list-group-item-action"
+                   th:classappend="${activeIntel}? 'active'">Intel</a>
+
+                <a th:href="@{/buscarCategoria(categoria='Impresoras termicas')}"
+                   class="list-group-item list-group-item-action"
+                   th:classappend="${activeImpresorastermicas}? 'active'">Impresoras termicas</a>
+            </ul>
+
+            <div class="text-center">
+                <img th:src="@{/img/envio_gratis.png}" class="img-fluid my-2">
+            </div>
+
+            <hr/>
+
+            <div class="text-center">
+                <img th:src="@{/img/iva_promocion.png}" class="img-fluid my-2">
+            </div>
+
+        </div>
+
+
+        <!--catalogo-->
+        <div class="col-md-9 mt-5" style="min-height: 800px;">
+            <div class="row">
+                <span class="contact100-form-title ml-3" style="color: #0d16ac">Catálogo</span>
+            </div>
+
+            <hr/>
+
+            <div class="row">
+
+                <div th:if="${listaVacia}"><h1>No hay productos por mostrar</h1></div>
+
+                <div class="col-sm-4 mb-3" data-th-each="producto : ${listaProductos}">
+
+                    <div class="wrap-contact--card">
+                        <div class="text-center">
+                            <a th:href="@{/detalleProductos?id=}+${producto.id}"><img
+                                    th:src="@{/img/productos/}+${producto.imagen}" class="img-fluid mb-2"></a>
+                        </div>
+
+                        <div class="text-decoration-none text-center">
+                            <a th:href="@{/detalleProductos?id=}+${producto.id}+@{&categoria=}+${producto.categoria}"><span
+                                    class="font-weight-bold" th:text="${#strings.toUpperCase(producto.nombre)}"></span>
+                                <br/><small th:text="${producto.descripcion}"></small></a>
+                            <h4 class="my-3"><strong>$ </strong><strong th:text="${producto.precio}"></strong></h4>
+                        </div>
+
+                        <div class="my-3 text-right">
+                            <span class="text-success">Hay <span
+                                    th:text="${producto.cantidad}"></span> disponibles</span>
+                        </div>
+
+                        <div>
+                            <a th:href="@{/preModalCompras?id=}+${producto.id}" class="btn btn-primary btn-block">Añadir
+                                al carro</a>
+                        </div>
+
+                        <a href="#exampleModalCenter" class="btn btn-danger" data-toggle="modal" style="display: none;">click
+                            open</a>
+                    </div>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <form th:action="@{/addItemToCarrito}" method="post">
+
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Añadir al carro</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5 th:text="${#strings.toUpperCase(productoSeleccionado.nombre)}"
+                                            class="mb-2"></h5>
+
+
+                                        <input type="hidden" name="idProducto" th:value="${productoSeleccionado.id}">
+
+                                        <span class="text-success mb-2" th:if="*{productoSeleccionado.cantidad&gt;10}">Mas de 10 disponibles</span>
+
+                                        <span class="text-primary mb-2"
+                                              th:if="*{productoSeleccionado.cantidad&lt;10 and productoSeleccionado.cantidad&gt;0}">Solo quedan
+                                    <span th:text="${productoSeleccionado.cantidad}"></span> disponibles</span>
+
+                                        <span class="text-danger mb-2" th:if="*{productoSeleccionado.cantidad==0}">No disponible</span>
+
+
+                                        <div class="form-group wrap-input100 mt-3">
+                                            <span class="label-input100">Cantidad</span>
+                                            <input class="input100" type="number" name="cantidad"
+                                                   placeholder="Ingresa la cantidad que deseas comprar"
+                                                   th:disabled="*{productoSeleccionado.cantidad==0}">
+                                            <span class="focus-input100"></span>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Añadir</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+
+<footer th:replace="plantilla/template :: footer"/>
+<div th:replace="plantilla/template :: body-bottom-scripts"/>
+
+<script>
+    $(document).ready(function () {
+        $('#exampleModalCenter').modal('toggle')
+    });
+</script>
+
+</body>
+</html>

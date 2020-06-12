@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: common-header"/>
+
+<body>
+
+<div class="container-contact100">
+
+    <!-- barra de navegacion-->
+    <div th:replace="plantilla/template :: navbar"/>
+
+    <div class="container">
+
+        <div class="row" style="min-height: 110px;">
+
+        </div>
+
+        <div class="row">
+
+            <!--categorias de productos-->
+            <div class="col-md-3" style="min-height: 800px;margin-top: 115px;">
+
+                <h5 class="mb-2">Categorías</h5>
+                <hr/>
+
+                <ul class="list-group" id="categoria">
+                    <a th:href="@{/miCuenta}" th:classappend="${activeInfo}? 'active'"
+                       class="list-group-item list-group-item-action ">Informacion Personal</a>
+
+                    <a th:href="@{/listaDireccionesUsuario}" class="list-group-item list-group-item-action"
+                       th:classappend="${activeDirecciones}? 'active'">Mis Direcciones</a>
+
+                    <a th:href="@{/listaMetodosPagoUsuario}" class="list-group-item list-group-item-action" th:classappend="${activeMetodosPago}? 'active'">Mis Metodos de pago</a>
+
+                </ul>
+
+            </div>
+
+
+            <!--Usuario-->
+            <div class="col-md-9 mt-5" style="min-height: 1000px;">
+                <div class="row">
+                    <span class="contact100-form-title ml-3" style="color: #0d16ac">Metodos de pago</span>
+                </div>
+
+                <hr/>
+
+                <!--                th:href="@{/nuevaDireccion}"-->
+                <a th:href="@{/nuevoMetodoPago}" class="btn btn-primary my-3" role="button">Crear Metodo de pago</a>
+
+                <div th:if="${!listaEmpty}" class="table-responsive ">
+                    <table class="table table-hover table-striped table-bordered table-sm bg-white">
+
+                        <thead>
+                        <tr class="text-center">
+                            <th>Tipo</th>
+                            <th>Nombre Titular</th>
+                            <th>Numero tarjeta</th>
+                            <th>Operaciones</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                        <tr data-th-each="metodosPago : ${listaMetodosPagoUsuario}" class="text-center">
+
+                            <td style="vertical-align: middle" th:text="${metodosPago.tipo}"></td>
+
+                            <td style="vertical-align: middle" th:text="${metodosPago.nombreTitular}"></td>
+
+                            <td style="vertical-align: middle" th:text="${metodosPago.numeroTarjeta}"></td>
+
+                            <td style="vertical-align: middle">
+                                <!--th:href="@{/editarMetodoPago?id=}+${direccionUsuario.id}"-->
+                                <a th:href="@{/editarMetodoPago?id=}+${metodosPago.id}" class="btn btn-warning btn-sm" role="button">
+                                    Editar
+                                </a>
+
+                                <!--th:href="@{/eliminarMetodoPago/}+${direccionUsuario.id}"-->
+                                <a th:href="@{/eliminarMetodoPago/}+${metodosPago.id}" class="btn btn-danger btn-sm" onclick="return confirm('¿Esta seguro?')" role="button">
+                                    Eliminar
+                                </a>
+                            </td>
+                        </tr>
+
+                        </tbody>
+
+
+                    </table>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+</div>
+<footer th:replace="plantilla/template :: footer"/>
+<div th:replace="plantilla/template :: body-bottom-scripts"/>
+
+
+</body>
+</html>

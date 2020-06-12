@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: common-header"/>
+
+<body>
+
+<div class="container-contact100">
+
+    <!-- barra de navegacion-->
+    <div th:replace="plantilla/template :: navbar"/>
+
+    <div class="container">
+
+        <div class="row" style="min-height: 110px;">
+
+        </div>
+
+
+        <div class="row">
+
+
+            <!--categorias de productos-->
+            <div class="col-md-3" style="min-height: 800px;margin-top: 115px;">
+
+                <h5 class="mb-2">Categorías</h5>
+                <hr/>
+
+                <ul class="list-group" id="categoria">
+                    <a th:href="@{/miCuenta}" th:classappend="${activeInfo}? 'active'"
+                       class="list-group-item list-group-item-action ">Informacion Personal</a>
+
+                    <a th:href="@{/listaDireccionesUsuario}" class="list-group-item list-group-item-action"
+                       th:classappend="${activeDirecciones}? 'active'">Mis Direcciones</a>
+
+                    <a th:href="@{/listaMetodosPagoUsuario}" class="list-group-item list-group-item-action" th:classappend="${activeMetodosPago}? 'active'">Mis Metodos de pago</a>
+
+                </ul>
+
+            </div>
+
+
+            <!--Añadir nueva direccion-->
+            <div class="col-md-9 mt-5" style="min-height: 1000px;">
+                <div class="row">
+                    <span class="contact100-form-title ml-3" style="color: #0d16ac">Metodos de pago</span>
+                </div>
+
+                <hr/>
+
+                <div class="wrap-contact100 mx-auto" style="width: 100% !important;">
+
+                    <form th:action="@{/nuevoMetodoPago}" method="post">
+
+                        <div class="row">
+
+                            <div class="col-sm-6" style="border-right: 1px solid #b6b3b3;">
+                                <input type="hidden" name="id" th:value="${metodoPago.id}">
+
+                                <input type="hidden" name="id" th:value="${billingUsuario.id}">
+
+
+                                <div class="form-group wrap-input100">
+                                    <span class="label-input100">Nombre de tarjeta</span>
+                                    <input class="input100" type="text" name="nombreTarjeta"
+                                           placeholder="Ingresa un nombre para tu tarjeta"
+                                           th:value="${metodoPago.nombreTarjeta}" required="required">
+                                    <span class="focus-input100"></span>
+                                </div>
+
+
+
+
+                                <img th:src="@{/img/creditcard.png}" class="img-fluid">
+
+                                <div class="form-group">
+                                    <span class="label-input100">Tipo de tarjeta</span>
+                                    <select th:name="tipo" class="form-control" th:value="${metodoPago.tipo}">
+                                        <option value="visa" th:selected="(${metodoPago.tipo}=='visa')">Visa</option>
+                                        <option value="mastercard" th:selected="(${metodoPago.tipo}=='mastercard')">Mastercard</option>
+                                        <option value="amex" th:selected="(${metodoPago.tipo}=='amex')">American Express</option>
+                                        <option value="discover" th:selected="(${metodoPago.tipo}=='discover')">Discover</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group wrap-input100">
+                                    <span class="label-input100">Nombre Titular</span>
+                                    <input class="input100" type="text" name="nombreTitular"
+                                           placeholder="Ingresa el nombre de tu tarjeta"
+                                           th:value="${metodoPago.nombreTitular}" required="required">
+                                    <span class="focus-input100"></span>
+                                </div>
+
+
+                                <div class="form-group wrap-input100">
+                                    <span class="label-input100">Numero Tarjeta</span>
+                                    <input class="input100" type="text" name="numeroTarjeta"
+                                           placeholder="Ingresa el numero de tu tarjeta"
+                                           th:value="${metodoPago.numeroTarjeta}" required="required">
+                                    <span class="focus-input100"></span>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <span class="label-input100">Fecha de expiracion</span>
+                                    <div class="d-flex d-inline-block">
+                                        <input type="text" th:value="${metodoPago.mesExpiracion}" name="mesExpiracion" placeholder="MM" class="form-control-sm" style="width: 50px !important;">
+                                        /
+                                        <input type="text" th:value="${metodoPago.yearExpiracion}" name="yearExpiracion" placeholder="YYYY" class="form-control-sm" style="width: 50px !important;">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group wrap-input100">
+                                    <span class="label-input100">CVC</span>
+                                    <input class="input100" type="number" name="cvc"
+                                           placeholder="Ingresa el codigo de seguridad "
+                                           th:value="${metodoPago.cvc}" required="required">
+                                    <span class="focus-input100"></span>
+                                </div>
+
+                            </div>
+
+
+
+
+                            <div class="col-sm-6" >
+
+                                <div class="form-group wrap-input100">
+                                    <span class="label-input100">Nombre para la cuenta</span>
+                                    <input class="input100" type="text" name="nombreBilling"
+                                           placeholder="Nombre para enviar tu cuenta"
+                                           th:value="${billingUsuario.nombreBilling}" required="required">
+                                    <span class="focus-input100"></span>
+                                </div>
+
+                                <div class="form-group wrap-input100">
+                                    <span class="label-input100">Direccion #1 para la cuenta</span>
+                                    <input class="input100" type="text" name="direccionUnoBilling"
+                                           placeholder="Ingresa la direccion"
+                                           th:value="${billingUsuario.direccionUnoBilling}" required="required">
+                                    <span class="focus-input100"></span>
+                                </div>
+
+
+                                <div class="form-group wrap-input100">
+                                    <span class="label-input100">Direccion #2 para la cuenta</span>
+                                    <input class="input100" type="text" name="direccionDosBilling"
+                                           placeholder="Ingresa la direccion"
+                                           th:value="${billingUsuario.direccionDosBilling}" required="required">
+                                    <span class="focus-input100"></span>
+                                </div>
+
+
+                                <div class="form-group wrap-input100">
+                                    <span class="label-input100">Ciudad para la cuenta</span>
+                                    <input class="input100" type="text" name="ciudadBilling"
+                                           placeholder="Ingresa la ciudad"
+                                           th:value="${billingUsuario.ciudadBilling}" required="required">
+                                    <span class="focus-input100"></span>
+                                </div>
+
+
+                                <div class="form-group wrap-input100">
+                                    <span class="label-input100">Departamento para la cuenta</span>
+                                    <input class="input100" type="text" name="departamentoBilling"
+                                           placeholder="Ingresa el departamento"
+                                           th:value="${billingUsuario.departamentoBilling}" required="required">
+                                    <span class="focus-input100"></span>
+                                </div>
+
+
+                                <div class="form-group wrap-input100">
+                                    <span class="label-input100">Pais para la cuenta</span>
+                                    <input class="input100" type="text" name="paisBilling"
+                                           placeholder="Ingresa el pais"
+                                           th:value="${billingUsuario.paisBilling}" required="required">
+                                    <span class="focus-input100"></span>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="container-contact100-form-btn">
+                            <div class="wrap-contact100-form-btn">
+                                <div class="contact100-form-bgbtn"></div>
+                                <button class="contact100-form-btn" type="submit">
+							<span>
+								Enviar
+								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+							</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="container-contact100-form-btn">
+                            <div class="wrap-contact100-form-btn">
+                                <div class="contact100-form-bgbtn"></div>
+                                <a class="contact100-form-btn" th:href="@{/listaMetodosPagoUsuario}">
+							<span>
+                                <i class="fa fa-long-arrow-left m-l-7 mr-2" aria-hidden="true"></i>
+								Cancelar
+							</span>
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+<footer th:replace="plantilla/template :: footer"/>
+<div th:replace="plantilla/template :: body-bottom-scripts"/>
+
+</body>
+</html>

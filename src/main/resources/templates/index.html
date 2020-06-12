@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: common-header"/>
+
+<body>
+
+<!--boton de llamada-->
+<div class="call-box d-flex justify-content-center align-items-center scrolli"
+     data-toggle="modal"
+     data-target="#contactModal">
+    <i class="fas fa-phone text-primary fa-3x"></i>
+    <p class="call-box__text d-none">Comunicate con <br> nosotros</p>
+    <p class="call-box__number d-none">312 860 3524 <br> 300 344 3901</p>
+</div>
+
+<!-- barra de navegacion-->
+<div th:replace="plantilla/template :: navbar"/>
+
+
+
+
+<!--para la imagen con efecto-->
+<section class="header-ppal ">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-1">
+                <div class="icon-show__box text-center">
+                    <i class="fas fa-industry fa-4x icon-show__img"></i>
+                    <p class="icon-show__text">Implementación de PLC´s</p>
+                </div>
+
+                <div class="icon-show__box text-center">
+                    <i class="fas fa-code fa-4x icon-show__img"></i>
+                    <p class="icon-show__text">Programación memorias EPROM</p>
+                </div>
+            </div>
+
+            <div class="col-md-10 heading-ppal__box d-flex align-items-center justify-content-center">
+                <div class="text-center  text-uppercase text-white pt-5">
+                    <h1 class="display-4 pt-5 heading-primary--main">Diseño Electrónico<span></span></h1>
+                    <h2 class="heading-primary--sub">Asistencia avanzada</h2>
+                </div>
+            </div><!---->
+
+            <div class="col-md-1">
+                <div class="icon-show__box text-center">
+                    <i class="fas fa-tools fa-4x icon-show__img"></i>
+                    <p class="icon-show__text">Reparación de tarjetas</p>
+                </div>
+
+                <div class="icon-show__box text-center">
+                    <i class="fas fa-microchip fa-4x icon-show__img"></i>
+                    <p class="icon-show__text">Diseño de circuitos impresos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<!--Algo de informacion de nuestros servicios e imagenes-->
+<section>
+    <div class="container">
+        <div class="text-center heading-secondary__box">
+            <h3 class="heading-secondary scrolli">Reparación de todo tipo de circuitos electrónicos de aplicación
+                industrial e instrumentación.</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-6 servicios-box scrolli">
+                <li class="paragraph"> Se maneja el servicio reparación de modulos de control para compresores de aire
+                    tales como Ingersoll-Rand, Atlas Copco, Kaeser y Quincy.
+                </li>
+                <li class="paragraph">Reparacion de modulos de control electronico para retroexcavadoras marca
+                    Caterpillar y Case 9030b, asi como para variadores de velocidad de diferentes marcas comerciales.
+                </li>
+            </div>
+
+            <!--seccion del slider-->
+            <div class="col-md-6 scrolli">
+                <div class="carousel slide carousel-fade" id="mycarousel" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li class="active" data-target="#mycarousel" data-slide-to="0"></li>
+                        <li data-target="#mycarousel" data-slide-to="1"></li>
+                        <li data-target="#mycarousel" data-slide-to="2"></li>
+                        <li data-target="#mycarousel" data-slide-to="3"></li>
+                    </ol>
+
+                    <!--selector imagenes-->
+                    <div class="carousel-inner">
+                        <div class="carousel-item carousel-img1 active" data-interval="2500">
+                            <div class="carousel-caption"></div>
+                        </div>
+
+                        <div class="carousel-item carousel-img2" data-interval="2500">
+                            <div class="carousel-caption"></div>
+                        </div>
+
+                        <div class="carousel-item carousel-img3" data-interval="2500">
+                            <div class="carousel-caption"></div>
+                        </div>
+
+                        <div class="carousel-item carousel-img4" data-interval="2500">
+                            <div class="carousel-caption"></div>
+                        </div>
+                    </div>
+
+                    <!--controles del carusel-->
+                    <a href="#mycarousel" class="carousel-control-prev" data-slide="prev"><span
+                            class="carousel-control-prev-icon"></span></a>
+
+                    <a href="#mycarousel" class="carousel-control-next" data-slide="next"><span
+                            class="carousel-control-next-icon"></span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<!--seccion con algo de informacion de informacion de la empresa - prestigio-->
+<section class="card-section d-flex align-items-center justify-content-center">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4 scrolli d-flex justify-content-center">
+                <div class="card bg-gray text-center card-move card-size">
+                    <i class="fas fa-briefcase fa-8x card-icon"></i>
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">Calidad certificada</h5>
+                        <p class="card-text">Somos ingenieros con disposición para suplir las necesidades de las nuevas
+                            tecnologias electronicas brindando soluciones efectivas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 scrolli d-flex justify-content-center">
+                <div class="card bg-gray text-center card-move card-size">
+                    <i class="fas fa-globe-americas fa-8x card-icon"></i>
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">Nuestra cobertura</h5>
+                        <p class="card-text">Contamos con una amplia cobertura de servicios en todo el Sur occidente
+                            colombiano para departamentos de Nariño, Cauca y Valle del Cauca.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 scrolli d-flex justify-content-center">
+                <div class="card bg-gray text-center card-move card-size">
+                    <i class="fas fa-car-battery fa-8x card-icon"></i>
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">Equipos especializados</h5>
+                        <p class="card-text">Poseemos un conjunto de equipos especializados para la deteccion de fallas
+                            y posterior reemplazo de componentes electrónicos dañado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+<!--seccion con informacion de lo que realiza la empresa-->
+<section class="services-section">
+    <div class="services-section__fondo"></div>
+    <div class="container">
+        <div class="text-center heading-secondary__box">
+            <h3 class="heading-secondary scrolli">Reparación de Modulos Intellisys</h3>
+        </div>
+
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-1"></div>
+
+            <div class="col-md-10 services__img scrolli m-5">
+                <img th:src="@{img/consola-3.JPG}" alt="" class="services__img-out services__img-out--1">
+                <img th:src="@{img/consola22.png}" alt="" class="services__img-out services__img-out--2">
+
+            </div>
+
+            <div class="col-md-1"></div>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<!--seccion de contacto-->
+<section id="contacto">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="scrolli contacto">
+                <h3 class="text-center heading-secondary">Escribenos para mas información</h3>
+                <hr>
+
+                <div class="card-body d-flex">
+                    <div class="col-md-8 col-sm-12">
+                        <div class="contacto__interno">
+
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <input type="text" class="form__input" placeholder="Nombre" id="name" name="name"
+                                           required/>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="email" class="form__input" placeholder="Email" id="email" name="email"
+                                           required/>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" class="form__input" placeholder="Telefono" id="tel" name="phone"
+                                           required/>
+                                </div>
+
+                                <div class="form-group">
+                                    <textarea cols="30" rows="2" class="form__input"
+                                              placeholder="Escribenos, estamos para ayudarte" name="message"
+                                              required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary button">Enviar</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4 d-none d-md-block d-lg-block align-self-center scrolli">
+                        <div class="card__info text-center">
+                            <p class="card__text">Cali - Valle</p>
+                            <p class="card__text">313 729 5691 - 300 344 3901</p>
+                            <a href="https://api.whatsapp.com/send?phone=+573003443901&text=Escribenos, estamos para ayudarte."><img
+                                    th:src="@{img/logo_Whatsapp.png}" alt="logo whatsapp" class="whatsapp_logo"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<div th:replace="plantilla/template :: modal"/>
+<footer th:replace="plantilla/template :: footer"/>
+<div th:replace="plantilla/template :: body-bottom-scripts"/>
+
+</body>
+</html>

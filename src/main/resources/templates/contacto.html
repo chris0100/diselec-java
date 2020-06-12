@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: common-header"/>
+
+<body>
+
+
+
+<!-- barra de navegacion-->
+<div th:replace="plantilla/template :: navbar"/>
+
+
+<!--<div style="min-height: 100px;"></div>-->
+
+<!--seccion de contacto-->
+<section class="header-contacto">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="scrolli contacto" style="margin-top: 234px;">
+                <h3 class="text-center heading-secondary">Escribenos para mas información</h3>
+                <hr>
+
+                <div class="card-body d-flex" >
+                    <div class="col-md-8 col-sm-12">
+                        <div class="contacto__interno">
+
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <input type="text" class="form__input" placeholder="Nombre" id="name" name="name"
+                                           required/>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="email" class="form__input" placeholder="Email" id="email" name="email"
+                                           required/>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" class="form__input" placeholder="Telefono" id="tel" name="phone"
+                                           required/>
+                                </div>
+
+                                <div class="form-group">
+                                    <textarea cols="30" rows="2" class="form__input"
+                                              placeholder="Escribenos, estamos para ayudarte" name="message"
+                                              required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary button">Enviar</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4 d-none d-md-block d-lg-block align-self-center scrolli">
+                        <div class="card__info text-center">
+                            <p class="card__text">Cali - Valle</p>
+                            <p class="card__text">313 729 5691 - 300 344 3901</p>
+                            <a href="https://api.whatsapp.com/send?phone=+573003443901&text=Escribenos, estamos para ayudarte."><img
+                                    th:src="@{img/logo_Whatsapp.png}" alt="logo whatsapp" class="whatsapp_logo"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<footer th:replace="plantilla/template :: footer"/>
+<div th:replace="plantilla/template :: body-bottom-scripts"/>
+
+</body>
+</html>

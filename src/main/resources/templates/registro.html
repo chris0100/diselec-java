@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: common-header"/>
+
+<body>
+
+<!-- barra de navegacion-->
+<div th:replace="plantilla/template :: navbar"/>
+
+<section class="header-registro" style="padding-top: 215px;">
+    <div class="container">
+
+
+        <div class="scrolli">
+
+
+            <div class="wrap-contact100 mx-auto">
+                <form th:action="@{/registroNew}" method="post">
+
+
+				<span class="contact100-form-title">
+					<img th:src="@{/img/registro.png}" style="width: 30px; height: auto;" class="my-auto"> Registrate
+				</span>
+
+
+
+                    <div class="form-group wrap-input100">
+                        <span class="label-input100">Tu username</span>
+                        <input class="input100" type="text" name="username" placeholder="Ingresa tu username" th:value="${usuario.username}">
+                        <span class="focus-input100"></span>
+                    </div>
+
+
+                    <div class="form-group wrap-input100">
+                        <span class="label-input100">Tu nombre</span>
+                        <input class="input100" type="text" name="nombre" placeholder="Ingresa tu nombre" th:value="${usuario.nombre}">
+                        <span class="focus-input100"></span>
+                    </div>
+
+
+                    <div class="form-group wrap-input100">
+                        <span class="label-input100">Tu Apellido</span>
+                        <input class="input100" type="text" name="apellido" placeholder="Ingresa tu apellido" th:value="${usuario.apellido}">
+                        <span class="focus-input100"></span>
+                    </div>
+
+
+                    <div class="form-group wrap-input100">
+                        <span class="label-input100">Email</span>
+                        <input class="input100" type="text" name="email" placeholder="Ingresa tu email" th:value="${usuario.email}">
+                        <span class="focus-input100"></span>
+                    </div>
+
+
+                    <div class="form-group wrap-input100">
+                        <span class="label-input100">C.C.</span>
+                        <input class="input100" type="text" name="numeroDocumento" placeholder="Ingresa tu documento" th:value="${usuario.numeroDocumento}">
+                        <span class="focus-input100"></span>
+                    </div>
+
+
+                    <div class="form-group wrap-input100">
+                        <span class="label-input100">Telefono</span>
+                        <input class="input100" type="text" name="telefono" placeholder="Ingresa tu numero telefonico" th:value="${usuario.telefono}">
+                        <span class="focus-input100"></span>
+                    </div>
+
+
+                    <div class="form-group wrap-input100">
+                        <span class="label-input100">Contraseña</span>
+                        <input class="input100" type="password" name="password" id="password" placeholder="Ingresa tu contraseña">
+                        <span class="focus-input100"></span>
+                    </div>
+
+
+
+                    <div class="form-group wrap-input100">
+                        <span class="label-input100">Contraseña</span>
+                        <input class="input100" type="password" id="confirmarPassword" name="confirmarPassword" placeholder="Repite tu contraseña">
+                        <span class="focus-input100"></span>
+                    </div>
+
+
+                    <div class="container-contact100-form-btn">
+                        <div class="wrap-contact100-form-btn">
+                            <div class="contact100-form-bgbtn"></div>
+                            <button class="contact100-form-btn" type="submit">
+							<span>
+								Enviar registro
+								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+							</span>
+                            </button>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+    </div>
+</section>
+
+
+<footer th:replace="plantilla/template :: footer"/>
+<div th:replace="plantilla/template :: body-bottom-scripts"/>
+
+</body>
+</html>

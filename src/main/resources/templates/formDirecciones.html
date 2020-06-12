@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: common-header"/>
+
+<body>
+
+<div class="container-contact100">
+
+    <!-- barra de navegacion-->
+    <div th:replace="plantilla/template :: navbar"/>
+
+    <div class="container">
+
+        <div class="row" style="min-height: 110px;">
+
+        </div>
+
+
+        <div class="row">
+
+
+            <!--categorias de productos-->
+            <div class="col-md-3" style="min-height: 800px;margin-top: 115px;">
+
+                <h5 class="mb-2">Categorías</h5>
+                <hr/>
+
+                <ul class="list-group" id="categoria">
+                    <a th:href="@{/miCuenta}" th:classappend="${activeInfo}? 'active'"
+                       class="list-group-item list-group-item-action ">Informacion Personal</a>
+
+                    <a th:href="@{/listaDireccionesUsuario}" class="list-group-item list-group-item-action"
+                       th:classappend="${activeDirecciones}? 'active'">Mis Direcciones</a>
+
+                    <a th:href="@{/listaMetodosPagoUsuario}" class="list-group-item list-group-item-action" th:classappend="${activeMetodosPago}? 'active'">Mis Metodos de pago</a>
+                </ul>
+
+            </div>
+
+
+            <!--Añadir nueva direccion-->
+            <div class="col-md-9 mt-5" style="min-height: 1000px;">
+                <div class="row">
+                    <span class="contact100-form-title ml-3" style="color: #0d16ac">Direcciones de Usuario</span>
+                </div>
+
+                <hr/>
+
+                <div class="wrap-contact100 mx-auto">
+
+                    <form th:action="@{/nuevaDireccion}" method="post">
+
+
+                        <input type="hidden" name="id" th:value="${direccionUsuario.id}">
+
+
+                        <div class="form-group wrap-input100">
+                            <span class="label-input100">Nombre</span>
+                            <input class="input100" type="text" name="nombreReceptor"
+                                   placeholder="Ingresa el nombre de quien recibe"
+                                   th:value="${direccionUsuario.nombreReceptor}" required="required">
+                            <span class="focus-input100"></span>
+                        </div>
+
+
+                        <div class="form-group wrap-input100">
+                            <span class="label-input100">Direccion #1</span>
+                            <input class="input100" type="text" name="direccionUno" required="required"
+                                   placeholder="Ingresa la direccion #1" th:value="${direccionUsuario.direccionUno}">
+                            <span class="focus-input100"></span>
+                        </div>
+
+
+                        <div class="form-group wrap-input100">
+                            <span class="label-input100">Direccion #2</span>
+                            <input class="input100" type="text" name="direccionDos"
+                                   placeholder="Ingresa la direccion #2" th:value="${direccionUsuario.direccionDos}">
+                            <span class="focus-input100"></span>
+                        </div>
+
+
+                        <div class="form-group wrap-input100">
+                            <span class="label-input100">Ciudad</span>
+                            <input class="input100" type="text" name="ciudad" placeholder="Ingresa la ciudad"
+                                   th:value="${direccionUsuario.ciudad}" required="required">
+                            <span class="focus-input100"></span>
+                        </div>
+
+
+                        <div class="form-group wrap-input100">
+                            <span class="label-input100">Departamento</span>
+                            <input class="input100" type="text" name="departamento"
+                                   placeholder="Ingresa el Departamento"
+                                   th:value="${direccionUsuario.departamento}" required="required">
+                            <span class="focus-input100"></span>
+                        </div>
+
+
+                        <div class="form-group wrap-input100">
+                            <span class="label-input100">Pais</span>
+                            <input class="input100" type="text" name="pais" placeholder="Ingresa el Pais"
+                                   th:value="${direccionUsuario.pais}" required="required">
+                            <span class="focus-input100"></span>
+                        </div>
+
+
+                        <div class="container-contact100-form-btn">
+                            <div class="wrap-contact100-form-btn">
+                                <div class="contact100-form-bgbtn"></div>
+                                <button class="contact100-form-btn" type="submit">
+							<span>
+								Enviar
+								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+							</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="container-contact100-form-btn">
+                            <div class="wrap-contact100-form-btn">
+                                <div class="contact100-form-bgbtn"></div>
+                                <a class="contact100-form-btn" th:href="@{/listaDireccionesUsuario}">
+							<span>
+                                <i class="fa fa-long-arrow-left m-l-7" aria-hidden="true"></i>
+								Cancelar
+							</span>
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+<footer th:replace="plantilla/template :: footer"/>
+<div th:replace="plantilla/template :: body-bottom-scripts"/>
+
+</body>
+</html>

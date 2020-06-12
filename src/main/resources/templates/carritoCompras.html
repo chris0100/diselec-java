@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: common-header"/>
+
+<body>
+
+
+<!-- barra de navegacion-->
+<div th:replace="plantilla/template :: navbar"/>
+
+
+<div class="container" style="min-height: 900px;">
+
+    <div class="row" style="min-height: 200px;">
+
+    </div>
+
+    <span class="contact100-form-title mt-3">Carrito de compras</span>
+
+
+    <div class="row d-flex justify-content-between">
+        <a th:href="@{/catalogoProductos}" class="btn btn-warning">Continuar Comprando</a>
+        <a th:href="@{/checkOut?id=}+${carritoDeCompras.id}" class="btn btn-success">Procesar compra</a>
+    </div>
+
+    <hr>
+
+    <div class="row">
+
+        <div class="col-sm-8">
+            <h5>Productos</h5>
+        </div>
+
+        <div class="col-sm-2">
+            <h5>Precio</h5>
+        </div>
+        <div class="col-sm-2">
+            <h5>Cantidad</h5>
+        </div>
+
+    </div>
+
+
+    <div class="d-flex flex-row my-3" th:each="cartItem : ${cartItemList}">
+
+        <form th:action="@{/actualizarCartItem}" method="post" class="w-100">
+
+            <div class="d-inline-flex col-sm-8">
+                <img th:src="@{/img/productos/}+${cartItem.producto.imagen}" class="img-fluid"
+                     style="width:70px; height: 110px;">
+
+
+                <div class="d-flex  flex-column">
+                    <a href="#"><h5 th:text="${#strings.toUpperCase(cartItem.producto.nombre)}"
+                                    class="text-dark font-weight-bold font-italic mx-3">
+                        Microcontrolador </h5></a>
+                    <div class="text-center">
+                         <span class="text-dark small"
+                               th:text="${cartItem.producto.cantidad}"></span><span class="text-dark small"> disponibles</span>
+                    </div>
+
+                    <a class="btn btn-sm btn-danger mx-3" th:href="@{/quitarCartItem?id=}+${cartItem.id}">Quitar</a>
+                </div>
+
+            </div>
+
+
+            <div class="d-inline-flex col-sm-2">
+
+                <p><strong>$ <span th:text="${cartItem.producto.precio}"></span></strong></p>
+
+            </div>
+
+
+            <div class="d-inline-flex col-sm-1">
+                <input type="hidden" name="id" th:value="${cartItem.id}">
+
+                <input type="number" class="form-control-sm cartItemCantidad w-75" th:value="${cartItem.cantidad}"
+                       th:id="${cartItem.id}"
+                       th:name="cantidad" th:disabled="${cartItem.producto.cantidad==0}">
+            </div>
+
+            <button style="display: none;" th:id="'update-item-'+${cartItem.id}" type="submit"
+                    class="btn btn-warning btn-sm">Ok
+            </button>
+
+        </form>
+
+    </div>
+
+    <hr>
+
+
+    <div class="row text-right">
+
+        <h4>
+            <strong style="font-size: large">Total Price
+                (<span th:text="${#lists.size(cartItemList)}"></span> productos):
+            </strong>
+            <span class="text-danger" style="font-size: large">$
+                <span th:text="${carritoDeCompras.subTotal}"></span>
+            </span>
+        </h4>
+
+    </div>
+
+
+</div>
+
+
+<footer th:replace="plantilla/template :: footer"/>
+<div th:replace="plantilla/template :: body-bottom-scripts"/>
+
+<script>
+    $(document).ready(function () {
+        $('.cartItemCantidad').on('change', function () {
+            var id = this.id;
+            console.log('se han hecho los cambios para: ' + id);
+            $('#update-item-' + id).css('display', 'block')
+        });
+    });
+
+</script>
+
+</body>
+</html>

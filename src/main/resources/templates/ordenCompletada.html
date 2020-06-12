@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: common-header"/>
+
+<body>
+
+<!-- barra de navegacion-->
+<div th:replace="plantilla/template :: navbar"/>
+
+<section class="">
+    <div class="container">
+
+        <div class="row" style="min-height: 110px;">
+
+        </div>
+
+
+        <div class="jumbotron jumbotron-fluid bg-primary">
+            <div class="container">
+                <h1 class="display-4">Compra Exitosa!!</h1>
+                <p class="lead">La fecha de entrega estimada es para <span th:text="${fechaEntrega}"></span></p>
+            </div>
+        </div>
+
+
+
+        <!--Listado de productos seleccionados-->
+        <table class="table table-sm">
+            <thead class="thead-light">
+
+            <tr class="text-center">
+                <th scope="col">Imagen</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr data-th-each="cartItem :   ${cartItemList}">
+                <td style="vertical-align: middle">
+                    <img th:src="@{/img/productos/}+${cartItem.producto.imagen}"
+                         class="img-fluid">
+                </td>
+
+                <td class="small text-center" style="vertical-align: middle"
+                    th:text="${#strings.toUpperCase(cartItem.producto.nombre)}">
+                </td>
+
+                <td class="small" th:text="${cartItem.producto.descripcion}"></td>
+
+                <td class="small text-center" style="vertical-align: middle"
+                    th:text="${cartItem.cantidad}"></td>
+
+                <td class="small text-center" style="vertical-align: middle"
+                    th:with="precio=${cartItem.producto.precio}"
+                    th:text="'$'+${#numbers.formatDecimal(precio,0,'COMMA',1,'POINT')}">
+                </td>
+
+            </tr>
+
+            </tbody>
+        </table>
+
+
+        <hr>
+
+        <h4 class="my-4">
+            <strong style="font-size: large">Valor Total
+                (<span th:text="${#lists.size(cartItemList)}"></span> productos):
+            </strong>
+            <span class="text-danger" style="font-size: large">
+                                            $ <span th:text="${orden.totalOrden}"></span>
+                                        </span>
+        </h4>
+
+
+
+    </div>
+
+</section>
+
+
+<footer th:replace="plantilla/template :: footer"/>
+<div th:replace="plantilla/template :: body-bottom-scripts"/>
+
+</body>
+</html>
