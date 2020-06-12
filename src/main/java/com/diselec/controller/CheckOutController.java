@@ -18,7 +18,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 public class CheckOutController {
@@ -251,7 +250,7 @@ public class CheckOutController {
 
         carritoDeComprasServiceObj.limpiarCarrito(carritoDeCompras);
 
-        mailSender.send(mailConstructor.constructOrderConfirmationEmail(usuario,orden, Locale.ENGLISH));
+        //mailSender.send(mailConstructor.constructOrderConfirmationEmail(usuario,orden, Locale.ENGLISH));
 
         return "ordenCompletada";
     }
