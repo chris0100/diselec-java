@@ -254,6 +254,4 @@ public class CheckOutController {
 
         return "ordenCompletada";
     }
-
-
 }

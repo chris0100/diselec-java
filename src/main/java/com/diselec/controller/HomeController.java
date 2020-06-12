@@ -7,7 +7,6 @@ import com.diselec.service.UsuarioService;
 import com.diselec.utility.EncriptarUtility;
 import com.diselec.utility.MailConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -118,8 +117,8 @@ public class HomeController {
             String appUrl = "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
             System.out.println("este es el context path: " + request.getContextPath());
 
-            SimpleMailMessage email = mailConstructor.enviarMensaje(appUrl,request.getLocale(),usuario,password);
-            mailSender.send(email);
+            //SimpleMailMessage email = mailConstructor.enviarMensaje(appUrl,request.getLocale(),usuario,password);
+            //mailSender.send(email);
 
             redireccionarAtributo.addFlashAttribute("success","Registro correcto, logueate para continuar");
 
