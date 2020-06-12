@@ -21,6 +21,8 @@ public class ProductosController {
     @GetMapping("/catalogoProductos")
     public String catalogoProductos(Model model){
         List<Producto> listaProductos = productoServiceObj.listaProductos();
+        for (Producto obj : listaProductos){
+            System.out.println(obj.getImagen());}
         if (listaProductos.isEmpty()){
             model.addAttribute("listaVacia",true);
         }
