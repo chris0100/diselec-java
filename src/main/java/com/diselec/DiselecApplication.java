@@ -30,7 +30,7 @@ public class DiselecApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         //agregar usuario
-        Usuario usuario = new Usuario();
+        /*Usuario usuario = new Usuario();
         usuario.setApellido("rodriguez");
         usuario.setNombre("christia");
         usuario.setEmail("alexroguez59@gmail.com");
@@ -45,7 +45,7 @@ public class DiselecApplication implements CommandLineRunner {
         userRoles.add(new UserRole(usuario,role));
         System.out.println("paso por aqui para crear usuario");
         //guardar usuario de prueba
-        usuarioServiceObj.crearUsuario(usuario,userRoles);
+        usuarioServiceObj.crearUsuario(usuario,userRoles);*/
 
 
         //agregar 1 producto de prueba
